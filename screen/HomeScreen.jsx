@@ -26,7 +26,7 @@ export default function HomeScreen({ navigation }) {
 	const [genres, setGenres] = React.useState([]);
 	const [loaded, setLoaded] = React.useState(false);
 
-	const moviedb = new MovieDb("***REMOVED***");
+	const moviedb = new MovieDb("");
 
 	React.useEffect(() => {
 		async function searchMovies() {
