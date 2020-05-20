@@ -5,6 +5,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { setCustomText, setCustomTextInput } from "react-native-global-props";
 import HomeScreen from "./screen/HomeScreen";
+import SeatsChoose from "./screen/SeatsChoose";
 
 const Stack = createStackNavigator();
 
@@ -40,6 +41,7 @@ export default function App() {
 		<NavigationContainer>
 			<Stack.Navigator headerMode="none" options={{ headerShown: false }}>
 				<Stack.Screen name="Home" component={HomeScreen} />
+				<Stack.Screen name="SeatsChoose" component={SeatsChoose} />
 			</Stack.Navigator>
 		</NavigationContainer>
 	);

@@ -1,6 +1,6 @@
 import { MovieDb } from "moviedb-promise";
 import React from "react";
-import { Dimensions, FlatList, PixelRatio, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, FlatList, PixelRatio, ScrollView, StatusBar, StyleSheet, Text, View } from "react-native";
 import BottomNavigation from "../component/BottomNavigation";
 import HomeHeader from "../component/HomeHeader";
 import LargePosterWithText from "../component/LargePosterWithText";
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
 	const [populars, setPopulars] = React.useState([]);
 	const [trendings, setTrendings] = React.useState([]);
 	const [genres, setGenres] = React.useState([]);
@@ -51,6 +51,8 @@ export default function HomeScreen() {
 			.join(", ");
 	};
 
+	const onTitlePress = () => navigation.navigate("SeatsChoose");
+
 	if (!loaded)
 		return (
 			<View>
@@ -61,6 +63,7 @@ export default function HomeScreen() {
 	return (
 		<>
 			<ScrollView style={styles.container}>
+				<StatusBar backgroundColor="#f1f1f1" barStyle="dark-content" />
 				<HomeHeader />
 				<FlatList
 					showsHorizontalScrollIndicator={false}
@@ -70,7 +73,9 @@ export default function HomeScreen() {
 					renderItem={({ item }) => <LargePosterWithText {...item} />}
 					keyExtractor={(item) => item.id.toString()}
 				/>
-				<Text style={styles.title}>Trending</Text>
+				<Text style={styles.title} onPress={onTitlePress}>
+					Trending
+				</Text>
 				<View>
 					{trendings.length > 0 &&
 						trendings.map((trending) => <PosterTextListItem {...trending} key={trending.id.toString()} genres={mapGenres(trending.genre_ids)} />)}
